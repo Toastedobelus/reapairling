@@ -10,8 +10,9 @@ public class Soul : MonoBehaviour
     public int maxHealth;
     public int currentHealth;
     public float hustle;
-    private GameObject destiny;
+    public GameObject destiny;
     public int attack;
+    public bool naving;
 
 
     private NavMeshAgent navMesh;
@@ -39,9 +40,7 @@ public class Soul : MonoBehaviour
                 break;
             default:
                 break;
-
         }
-
     }
 
     private void ChangeMood()
@@ -49,7 +48,7 @@ public class Soul : MonoBehaviour
         switch (mood)
         {
             case Mood.Chill:
-                Destiny = God.current.gate;
+                Destiny = God.current.gateRallyPoint;
                 hustle = 3;
                 GetComponent<Material>().color = Color.white;
 
@@ -61,7 +60,7 @@ public class Soul : MonoBehaviour
                 break;
             case Mood.Impatient:
                 hustle = 7;
-                Destiny = God.current.gate;
+                Destiny = God.current.gateRallyPoint;
                 GetComponent<Material>().color = Color.cyan;
                 break;
         }
@@ -69,6 +68,7 @@ public class Soul : MonoBehaviour
 
     public GameObject Destiny
     {
+       
         get => destiny;
         set
         {
@@ -82,7 +82,7 @@ public class Soul : MonoBehaviour
     {
         navMesh = gameObject.GetComponent<NavMeshAgent>();
         shader = gameObject.GetComponent<Shader>();
-        Destiny = God.current.gate;
+        Destiny = God.current.gateRallyPoint;
         navMesh.speed = hustle;
         navMesh.isStopped = false;
     }
@@ -90,6 +90,7 @@ public class Soul : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        naving = navMesh.isStopped;
         if (mood == Mood.Impatient)
         {
             if (Vector3.Distance(transform.position, God.current.FindNearestPlayer(transform.position).transform.position) < 5)

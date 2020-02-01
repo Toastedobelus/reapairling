@@ -12,6 +12,7 @@ public class God : MonoBehaviour
     public float deathRateGain;
     public GameObject playerPrefab;
     public GameObject gate;
+    public GameObject gateRallyPoint;
     public Canvas canvas;
     public Slider gateSlider;
     public List<GameObject> Souls = new List<GameObject>();
@@ -35,7 +36,7 @@ public class God : MonoBehaviour
 
         for (int i = 0; i < playerCount; i++)
         {
-            GameObject player = Instantiate(playerPrefab,transform.position, Quaternion.identity) as GameObject;
+            GameObject player = Instantiate(playerPrefab,gateRallyPoint.transform.position, Quaternion.identity) as GameObject;
             Player playerScript = player.GetComponent<Player>();
             playerScript.Create(controls[i]);
             Players.Add(player);

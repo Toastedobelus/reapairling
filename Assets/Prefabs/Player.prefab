@@ -94,9 +94,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hustle: 8
-  jump: 50
+  jump: 25
   gravity: 20
   repairAmount: 1
+  maxHealth: 25
+  currentHealth: 25
 --- !u!143 &3411386424923674045
 CharacterController:
   m_ObjectHideFlags: 0
