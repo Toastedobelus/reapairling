@@ -8,20 +8,18 @@ public class Player : MonoBehaviour
     CharacterController characterController;
 
     public ControlScheme controls;
-    public float hustle = 2.0f;
-    public float jump = 4.0f;
-    public float gravity = 20.0f;
+    public float hustle = 4;
+    public float jump = 4;
+    public float gravity = 9.8f;
+    public float rotateSpeed = 90;
 
     public int repairAmount = 1;
     public int maxHealth = 25;
     public int currentHealth = 25;
 
-
-
-
     private float pickupRange = 3;
     private Vector3 moveDirection = Vector3.zero;
-  
+    private Vector3 rotation;
 
     // Start is called before the first frame update
     void Start()
@@ -34,23 +32,25 @@ public class Player : MonoBehaviour
         this.controls = controlScheme;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        if (characterController.isGrounded)
+        float horizontal = getHorizontal();
+        float vertical = getVertical();
+
+        this.rotation = new Vector3(0, horizontal * rotateSpeed * Time.deltaTime, 0);
+
+        Vector3 move = new Vector3(0, 0, vertical * Time.deltaTime);
+        move = this.transform.TransformDirection(move);
+
+        if (characterController.isGrounded && this.controls.checkJump())
         {
-            moveDirection = this.getVelocity();
-            moveDirection *= this.hustle;
-
-            if (this.controls.checkJump())
-            {
-                moveDirection.y = this.jump;
-            }
+            move.y += this.jump;
         }
-        
-        moveDirection.y -= (gravity * Time.deltaTime);
 
-        characterController.Move(moveDirection * Time.deltaTime);
+        move.y -= (gravity * Time.deltaTime);
+
+        characterController.Move(move * hustle);
+        this.transform.Rotate(this.rotation);
 
         if (this.controls.checkInteraction())
         {
@@ -59,27 +59,30 @@ public class Player : MonoBehaviour
         }
     }
 
-    Vector3 getVelocity()
+    float getVertical()
     {
-        Vector3 velocity = Vector3.zero;
         if (this.controls.checkUp())
         {
-            velocity.z = -this.hustle;
+            return -this.hustle;
         }
         else if (this.controls.checkDown())
         {
-            velocity.z = this.hustle;
+            return this.hustle;
         }
+        return 0.0f;
+    }
+
+    float getHorizontal()
+    {
         if (this.controls.checkLeft())
         {
-            velocity.x = this.hustle;
+            return -this.hustle;
         }
         else if (this.controls.checkRight())
         {
-            velocity.x = -this.hustle;
+            return this.hustle;
         }
-
-        return velocity;
+        return 0.0f;
     }
 
     void getCollisions()
