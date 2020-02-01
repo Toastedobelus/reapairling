@@ -6,9 +6,13 @@ public class God : MonoBehaviour
 {
 
     public int maxSouls;
+    public int playerCount = 3;
     public float deathRate;
     public float deathRateGain;
+    public GameObject playerPrefab;
+    public GameObject gate;
     public List<GameObject> Souls = new List<GameObject>();
+    public List<GameObject> Players = new List<GameObject>();
     public float theCurrentAmountOfPeopleDyingRightNowAtTheMomentCurrently;
     public List<GameObject> charterOfTheDamned = new List<GameObject>();
     public List<Player> Reaperlings = new List<Player>();
@@ -19,14 +23,32 @@ public class God : MonoBehaviour
     void Start()
     {
         God.current = this;
+
+        List<ControlScheme> controls = new List<ControlScheme>();
+        controls.Add(new WASDControlScheme());
+        controls.Add(new ArrowKeysControlScheme());
+        controls.Add(new IJKLControlScheme());
+
+        for (int i = 0; i < playerCount; i++)
+        {
+            GameObject player = Instantiate(playerPrefab, new Vector3(-12 + i, -80, 223), Quaternion.identity) as GameObject;
+            Player playerScript = player.GetComponent<Player>();
+            playerScript.Create(controls[i]);
+            Players.Add(player);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        Gate gateScript = gate.GetComponent<Gate>();
         if (maxSouls < charterOfTheDamned.Count)
         {
             Defeat();
+        }
+        if (gateScript.isRepaired())
+        {
+            Victory();
         }
 
         //apply the death rate to the counter

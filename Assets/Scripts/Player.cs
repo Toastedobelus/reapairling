@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Player : MonoBehaviour
 {
     CharacterController characterController;
@@ -12,14 +11,20 @@ public class Player : MonoBehaviour
     public float jump = 4.0f;
     public float gravity = 20.0f;
 
+    public int repairAmount = 1;
+
     private float pickupRange = 3;
     private Vector3 moveDirection = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
     {
-        this.controls = new WASDControlScheme();
         characterController = GetComponent<CharacterController>();
+    }
+
+    public void Create(ControlScheme controlScheme)
+    {
+        this.controls = controlScheme;
     }
 
     // Update is called once per frame
@@ -75,7 +80,11 @@ public class Player : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, pickupRange);
         for (int i = 0; i < hitColliders.Length; i++)
         {
-            Debug.Log(hitColliders[i].tag);
+            if (hitColliders[i].tag == "Gate")
+            {
+                Gate gate = hitColliders[i].GetComponent<Gate>();
+                gate.Repair(this.repairAmount);
+            }
         }
     }
 }
