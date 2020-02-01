@@ -18,8 +18,12 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.controls = new WASDControlScheme();
         characterController = GetComponent<CharacterController>();
+    }
+
+    public void Create(ControlScheme controlScheme)
+    {
+        this.controls = controlScheme;
     }
 
     // Update is called once per frame
