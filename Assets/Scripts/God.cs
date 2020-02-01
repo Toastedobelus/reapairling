@@ -11,6 +11,7 @@ public class God : MonoBehaviour
     public List<GameObject> Souls = new List<GameObject>();
     public float theCurrentAmountOfPeopleDyingRightNowAtTheMomentCurrently;
     public List<GameObject> charterOfTheDamned = new List<GameObject>();
+    public List<Player> Reaperlings = new List<Player>();
     public GameObject Gate;
     public static God current;
 
@@ -39,9 +40,21 @@ public class God : MonoBehaviour
         {
             SpawnSoul();
             theCurrentAmountOfPeopleDyingRightNowAtTheMomentCurrently -= 1f;
-        }   
+        }
     }
 
+    public Player FindNearestPlayer(Vector3 callerPosition)
+    {
+        var closestPlayer = Reaperlings[0];
+        for (int i = 1; i < Reaperlings.Count; i++)
+        {
+            if (Vector3.Distance(Reaperlings[i].transform.position, callerPosition) < Vector3.Distance(closestPlayer.transform.position, callerPosition))
+            {
+                closestPlayer = Reaperlings[i];
+            }
+        }
+        return closestPlayer;
+    }
 
     void SpawnSoul()
     {
