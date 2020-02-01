@@ -7,7 +7,7 @@ public class God : MonoBehaviour
 {
 
     public int maxSouls;
-    public int playerCount = 3;
+    public int playerCount = 4;
     public float deathRate;
     public float deathRateGain;
     public GameObject playerPrefab;
@@ -32,12 +32,29 @@ public class God : MonoBehaviour
         controls.Add(new WASDControlScheme());
         controls.Add(new ArrowKeysControlScheme());
         controls.Add(new IJKLControlScheme());
+        controls.Add(new IJKLControlScheme());
+
+        List<Rect> viewports = new List<Rect>();
+        if (playerCount > 2)
+        {
+            viewports.Add(new Rect(0, 0, 0.5f, 0.5f));
+            viewports.Add(new Rect(0.5f, 0.5f, 0.5f, 0.5f));
+            viewports.Add(new Rect(0, 0.5f, 0.5f, 0.5f));
+            viewports.Add(new Rect(0.5f, 0, 0.5f, 0.5f));
+        } else if (playerCount > 1)
+        {
+            viewports.Add(new Rect(0, 0, 0.5f, 1));
+            viewports.Add(new Rect(0.5f, 0, 0.5f, 1));
+        } else
+        {
+            viewports.Add(new Rect(0, 0, 1, 1));
+        }
 
         for (int i = 0; i < playerCount; i++)
         {
             GameObject player = Instantiate(playerPrefab,transform.position, Quaternion.identity) as GameObject;
             Player playerScript = player.GetComponent<Player>();
-            playerScript.Create(controls[i]);
+            playerScript.Create(controls[i], viewports[i]);
             Players.Add(player);
         }
     }

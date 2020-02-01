@@ -7,12 +7,15 @@ public class Player : MonoBehaviour
 {
     CharacterController characterController;
 
+    public Camera camera;
+
     public ControlScheme controls;
     public float hustle = 4;
     public float jump = 4;
     public float gravity = 9.8f;
     public float rotateSpeed = 90;
 
+    public int id;
     public int repairAmount = 1;
     public int maxHealth = 25;
     public int currentHealth = 25;
@@ -27,9 +30,10 @@ public class Player : MonoBehaviour
         characterController = GetComponent<CharacterController>();
     }
 
-    public void Create(ControlScheme controlScheme)
+    public void Create(ControlScheme controlScheme, Rect viewportRect)
     {
         this.controls = controlScheme;
+        this.camera.rect = viewportRect;
     }
 
     public void Update()
@@ -63,11 +67,11 @@ public class Player : MonoBehaviour
     {
         if (this.controls.checkUp())
         {
-            return -this.hustle;
+            return this.hustle;
         }
         else if (this.controls.checkDown())
         {
-            return this.hustle;
+            return -this.hustle;
         }
         return 0.0f;
     }
