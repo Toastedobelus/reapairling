@@ -12,7 +12,7 @@ public class God : MonoBehaviour
     public float theCurrentAmountOfPeopleDyingRightNowAtTheMomentCurrently;
     public List<GameObject> charterOfTheDamned = new List<GameObject>();
     public List<Player> Reaperlings = new List<Player>();
-    public GameObject Gate;
+    public GameObject gate;
     public static God current;
 
     // Start is called before the first frame update

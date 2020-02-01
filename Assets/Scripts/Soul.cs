@@ -30,7 +30,7 @@ public class Soul : MonoBehaviour
         switch (mood)
         {
             case Mood.Chill:
-                Destiny = God.current.Gate;
+                Destiny = God.current.gate;
                 hustle = 3;
                 GetComponent<Material>().color = Color.white;
 
@@ -42,7 +42,7 @@ public class Soul : MonoBehaviour
                 break;
             case Mood.Impatient:
                 hustle = 7;
-                Destiny = God.current.Gate;
+                Destiny = God.current.gate;
                 GetComponent<Material>().color = Color.cyan;
                 break;
         }
@@ -61,7 +61,7 @@ public class Soul : MonoBehaviour
     {
         navMesh = gameObject.GetComponent<NavMeshAgent>();
         shader = gameObject.GetComponent<Shader>();
-        Destiny = God.current.Gate;
+        Destiny = God.current.gate;
         navMesh.speed = hustle;
         navMesh.isStopped = false;
     }
