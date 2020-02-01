@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     public int maxHealth = 25;
     public int currentHealth = 25;
 
+    public List<Collectible> collectibles;
+
     private float pickupRange = 3;
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 rotation;
@@ -103,6 +105,20 @@ public class Player : MonoBehaviour
             {
                 Soul soul = hitColliders[i].GetComponent<Soul>();
                 soul.TakeDamage(2);
+            }
+            if (hitColliders[i].tag == "Player")
+            {
+                Player player = hitColliders[i].GetComponent<Player>();
+                if (player.GetInstanceID() != this.GetInstanceID())
+                {
+                    Debug.Log("Hi, I'm a Player :)");
+                }
+            }
+            if (hitColliders[i].tag == "Collectible")
+            {
+                Collectible collectible = hitColliders[i].GetComponent<Collectible>();
+                this.collectibles.Add(collectible);
+                collectible.ownerPlayer = this;
             }
         }
     }
