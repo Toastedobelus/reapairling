@@ -8,7 +8,8 @@ public interface ControlScheme
     bool checkDown();
     bool checkLeft();
     bool checkRight();
-    bool checkAttack();
+    bool checkJump();
+    bool checkInteraction();
 }
 
 public class WASDControlScheme : ControlScheme
@@ -61,7 +62,19 @@ public class WASDControlScheme : ControlScheme
         }
     }
 
-    public bool checkAttack()
+    public bool checkJump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool checkInteraction()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -124,7 +137,19 @@ public class ArrowKeysControlScheme : ControlScheme
         }
     }
 
-    public bool checkAttack()
+    public bool checkJump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool checkInteraction()
     {
         if (Input.GetKeyDown(KeyCode.RightControl))
         {
@@ -187,7 +212,19 @@ public class IJKLControlScheme : ControlScheme
         }
     }
 
-    public bool checkAttack()
+    public bool checkJump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool checkInteraction()
     {
         if (Input.GetKeyDown(KeyCode.N))
         {

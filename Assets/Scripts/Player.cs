@@ -5,57 +5,66 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    CharacterController characterController;
 
     public ControlScheme controls;
-    public float hustle = 2f;
+    public float hustle = 2.0f;
+    public float jump = 4.0f;
+    public float gravity = 20.0f;
 
-    public Vector3 velocity;
+    private Vector3 moveDirection = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
     {
-        this.controls = new IJKLControlScheme();
-    }
-
-    void FixedUpdate()
-    {
-        this.velocity = this.getVelocity();
+        this.controls = new WASDControlScheme();
+        characterController = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.velocity = this.getVelocity();
-        Vector3 position = this.transform.position;
-        position += velocity * Time.deltaTime;
-        this.transform.position = position;
-        if (this.controls.checkAttack())
+        if (characterController.isGrounded)
         {
-            Debug.Log("Attack key pressed");
+            moveDirection = this.getVelocity();
+            moveDirection *= this.hustle;
+
+            if (this.controls.checkJump())
+            {
+                moveDirection.y = this.jump;
+            }
+        }
+        
+        moveDirection.y -= (gravity * Time.deltaTime);
+
+        characterController.Move(moveDirection * Time.deltaTime);
+
+        if (this.controls.checkInteraction())
+        {
+            Debug.Log("Interaction key pressed");
         }
     }
 
     Vector3 getVelocity()
     {
-        float xSpeed = 0f;
-        float zSpeed = 0f;
+        Vector3 velocity = Vector3.zero;
         if (this.controls.checkUp())
         {
-            zSpeed = this.hustle;
+            velocity.z = -this.hustle;
         }
         else if (this.controls.checkDown())
         {
-            zSpeed = -this.hustle;
+            velocity.z = this.hustle;
         }
         if (this.controls.checkLeft())
         {
-            xSpeed = -this.hustle;
+            velocity.x = this.hustle;
         }
         else if (this.controls.checkRight())
         {
-            xSpeed = this.hustle;
+            velocity.x = -this.hustle;
         }
 
-        return new Vector3(xSpeed, 0.0f, zSpeed);
+        return velocity;
     }
 }
