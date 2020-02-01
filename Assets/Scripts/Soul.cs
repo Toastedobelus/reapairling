@@ -13,10 +13,11 @@ public class Soul : MonoBehaviour
     public GameObject destiny;
     public int attack;
     public bool naving;
-
+    public float aggroRange;
+    public GameObject currentTarget;
 
     private NavMeshAgent navMesh;
-    private Shader shader;
+    private Renderer meshRenderer;
 
     public Mood Mood
     {
@@ -53,19 +54,19 @@ public class Soul : MonoBehaviour
         {
             case Mood.Chill:
                 Destiny = God.current.gateRallyPoint;
-                hustle = 3;
-                GetComponent<Material>().color = Color.white;
+                Hustle = 3;
+                meshRenderer.material.SetColor("_Color", Color.blue);
 
                 break;
             case Mood.Vexed:
-                hustle = 10;
-                destiny = God.current.FindNearestPlayer(this.transform.position);
-                GetComponent<Material>().color = Color.red;
-                break;
+                Hustle = 10;
+                currentTarget = God.current.FindNearestPlayer(this.transform.position);
+                meshRenderer.material.SetColor("_Color",Color.red);                
+                    break;
             case Mood.Impatient:
-                hustle = 7;
+                Hustle = 7;
                 Destiny = God.current.gateRallyPoint;
-                GetComponent<Material>().color = Color.cyan;
+                meshRenderer.material.SetColor("_Color", Color.cyan);
                 break;
         }
     }
@@ -81,11 +82,21 @@ public class Soul : MonoBehaviour
         }
     }
 
+    public float Hustle
+    {
+
+        get => hustle;
+        set
+        {
+            hustle = value;
+            navMesh.speed = value;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
         navMesh = gameObject.GetComponent<NavMeshAgent>();
-        shader = gameObject.GetComponent<Shader>();
+        meshRenderer = gameObject.GetComponent<Renderer>();
         Destiny = God.current.gateRallyPoint;
         navMesh.speed = hustle;
         navMesh.isStopped = false;
@@ -94,12 +105,16 @@ public class Soul : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (mood == Mood.Impatient)
+        if (Mood == Mood.Impatient)
         {
-            if (Vector3.Distance(transform.position, God.current.FindNearestPlayer(transform.position).transform.position) < 10)
+            if (Vector3.Distance(transform.position, God.current.FindNearestPlayer(transform.position).transform.position) < aggroRange)
             {
-                mood = Mood.Vexed;
+                Mood = Mood.Vexed;
             }
+        }
+        if (Mood == Mood.Vexed)
+        {
+            navMesh.destination = currentTarget.transform.position;
         }
     }
 

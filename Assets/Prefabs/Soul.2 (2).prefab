@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 879bb85688e4e4543a6db3444ffa5634, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -154,6 +154,7 @@ MonoBehaviour:
   destiny: {fileID: 0}
   attack: 1
   naving: 0
+  aggroRange: 20
 --- !u!135 &2044072044056503861
 SphereCollider:
   m_ObjectHideFlags: 0
