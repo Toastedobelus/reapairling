@@ -113,10 +113,10 @@ public class God : MonoBehaviour
     // this is the method for when you win
     void Victory()
     {
-        Debug.Log("You have won!");
+       // Debug.Log("You have won!");
     }
     void Defeat()
     {
-        Debug.Log("You have lost!");
+       // Debug.Log("You have lost!");
     }
 }

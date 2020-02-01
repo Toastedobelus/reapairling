@@ -28,20 +28,24 @@ public class Soul : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        switch (collision.gameObject.tag)
+        switch (other.gameObject.tag)
         {
+
             case "Player":
-                collision.gameObject.GetComponent<Player>().TakeDamage(attack);
+                Debug.Log("a soul has Collided with a Player!");
+                other.gameObject.GetComponent<Player>().TakeDamage(attack);
                 break;
-            case "gate":
-                collision.gameObject.GetComponent<Gate>().TakeDamage(attack);
+            case "Gate":
+                Debug.Log("a soul has Collided with a gate!");
+                other.gameObject.GetComponent<Gate>().TakeDamage(attack);
                 break;
             default:
                 break;
         }
     }
+   
 
     private void ChangeMood()
     {
@@ -90,10 +94,9 @@ public class Soul : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        naving = navMesh.isStopped;
         if (mood == Mood.Impatient)
         {
-            if (Vector3.Distance(transform.position, God.current.FindNearestPlayer(transform.position).transform.position) < 5)
+            if (Vector3.Distance(transform.position, God.current.FindNearestPlayer(transform.position).transform.position) < 10)
             {
                 mood = Mood.Vexed;
             }
