@@ -22,7 +22,6 @@ public class Soul : MonoBehaviour
         set {
             mood = value;
             ChangeMood();
-
         }
     }
 
@@ -32,15 +31,20 @@ public class Soul : MonoBehaviour
         {
             case Mood.Chill:
                 Destiny = God.current.Gate;
-                hustle = 5;
+                hustle = 3;
+                GetComponent<Material>().color = Color.white;
+
                 break;
             case Mood.Vexed:
                 hustle = 10;
-                destiny = God.current.FindNearestPlayer();
-                shader.albedo
+                destiny = God.current.FindNearestPlayer(this.transform.position).gameObject;
+                GetComponent<Material>().color = Color.red;
                 break;
-
-
+            case Mood.Impatient:
+                hustle = 7;
+                Destiny = God.current.Gate;
+                GetComponent<Material>().color = Color.cyan;
+                break;
         }
     }
 
@@ -60,13 +64,18 @@ public class Soul : MonoBehaviour
         Destiny = God.current.Gate;
         navMesh.speed = hustle;
         navMesh.isStopped = false;
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-            
+        if (mood == Mood.Impatient)
+        {
+           if( Vector3.Distance(transform.position,God.current.FindNearestPlayer(transform.position).transform.position) < 5)
+            {
+                mood = Mood.Vexed;
+            }
+        }
     }
 
 
