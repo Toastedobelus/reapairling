@@ -18,6 +18,8 @@ public class God : MonoBehaviour
     public List<GameObject> Players = new List<GameObject>();
     public float theCurrentAmountOfPeopleDyingRightNowAtTheMomentCurrently;
     public List<GameObject> charterOfTheDamned = new List<GameObject>();
+    public List<Player> Reaperlings = new List<Player>();
+    public GameObject gate;
     public static God current;
 
     // Start is called before the first frame update
@@ -70,6 +72,18 @@ public class God : MonoBehaviour
         gateSlider.value = gateScript.healthPercentage();
     }
 
+    public Player FindNearestPlayer(Vector3 callerPosition)
+    {
+        var closestPlayer = Reaperlings[0];
+        for (int i = 1; i < Reaperlings.Count; i++)
+        {
+            if (Vector3.Distance(Reaperlings[i].transform.position, callerPosition) < Vector3.Distance(closestPlayer.transform.position, callerPosition))
+            {
+                closestPlayer = Reaperlings[i];
+            }
+        }
+        return closestPlayer;
+    }
 
     void SpawnSoul()
     {
