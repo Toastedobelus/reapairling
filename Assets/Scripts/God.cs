@@ -18,8 +18,6 @@ public class God : MonoBehaviour
     public List<GameObject> Souls = new List<GameObject>();
     public List<GameObject> Players = new List<GameObject>();
     public float theCurrentAmountOfPeopleDyingRightNowAtTheMomentCurrently;
-    public List<GameObject> charterOfTheDamned = new List<GameObject>();
-    public List<Player> Reaperlings = new List<Player>();
     public static God current;
 
     // Start is called before the first frame update
@@ -70,7 +68,7 @@ public class God : MonoBehaviour
     void Update()
     {
         Gate gateScript = gate.GetComponent<Gate>();
-        if (maxSouls < charterOfTheDamned.Count)
+        if (maxSouls < Souls.Count)
         {
             Defeat();
         }
@@ -95,14 +93,14 @@ public class God : MonoBehaviour
         gateSlider.value = gateScript.healthPercentage();
     }
 
-    public Player FindNearestPlayer(Vector3 callerPosition)
+    public GameObject FindNearestPlayer(Vector3 callerPosition)
     {
-        var closestPlayer = Reaperlings[0];
-        for (int i = 1; i < Reaperlings.Count; i++)
+        var closestPlayer = Players[0];
+        for (int i = 1; i < Players.Count; i++)
         {
-            if (Vector3.Distance(Reaperlings[i].transform.position, callerPosition) < Vector3.Distance(closestPlayer.transform.position, callerPosition))
+            if (Vector3.Distance(Players[i].transform.position, callerPosition) < Vector3.Distance(closestPlayer.transform.position, callerPosition))
             {
-                closestPlayer = Reaperlings[i];
+                closestPlayer = Players[i];
             }
         }
         return closestPlayer;
@@ -110,7 +108,7 @@ public class God : MonoBehaviour
 
     void SpawnSoul()
     {
-        charterOfTheDamned.Add(Instantiate(Souls[0], new Vector3(transform.position.x + Random.Range(1, -1), transform.position.y, transform.position.z), Quaternion.identity));
+        Souls.Add(Instantiate(Souls[0], new Vector3(transform.position.x + Random.Range(1, -1), transform.position.y, transform.position.z), Quaternion.identity));
     }
     // this is the method for when you win
     void Victory()

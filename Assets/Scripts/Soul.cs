@@ -55,7 +55,7 @@ public class Soul : MonoBehaviour
                 break;
             case Mood.Vexed:
                 hustle = 10;
-                destiny = God.current.FindNearestPlayer(this.transform.position).gameObject;
+                destiny = God.current.FindNearestPlayer(this.transform.position);
                 GetComponent<Material>().color = Color.red;
                 break;
             case Mood.Impatient:
