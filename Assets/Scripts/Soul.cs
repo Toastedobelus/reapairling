@@ -123,6 +123,7 @@ public class Soul : MonoBehaviour
         currentHealth = -damage;
         if (currentHealth <= 0)
         {
+            God.current.SpawnCollectible(transform.position);
             Destroy(gameObject);
         }
     }

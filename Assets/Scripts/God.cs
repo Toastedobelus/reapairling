@@ -11,12 +11,14 @@ public class God : MonoBehaviour
     public float deathRate;
     public float deathRateGain;
     public GameObject playerPrefab;
+    public GameObject collectiblePrefab;
     public GameObject gate;
     public GameObject gateRallyPoint;
     public Canvas canvas;
     public Slider gateSlider;
     public List<GameObject> Souls = new List<GameObject>();
     public List<GameObject> Players = new List<GameObject>();
+    public List<GameObject> Collectibles = new List<GameObject>();
     public float theCurrentAmountOfPeopleDyingRightNowAtTheMomentCurrently;
     public static God current;
 
@@ -110,6 +112,17 @@ public class God : MonoBehaviour
     {
         Souls.Add(Instantiate(Souls[0], new Vector3(transform.position.x + Random.Range(1, -1), transform.position.y, transform.position.z), Quaternion.identity));
     }
+
+    public void SpawnCollectible(Vector3 position)
+    {
+        // Player targetPlayer = Players[(int)Random.Range(0, playerCount)];
+        Player targetPlayer = Players[(int)Random.Range(0, playerCount)].GetComponent<Player>();
+        GameObject collectible = Instantiate(collectiblePrefab, position, Quaternion.identity) as GameObject;
+        Collectible collectibleScript = collectible.GetComponent<Collectible>();
+        collectibleScript.Create(targetPlayer);
+        Collectibles.Add(collectible);
+    }
+
     // this is the method for when you win
     void Victory()
     {

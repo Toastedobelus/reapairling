@@ -16,7 +16,7 @@ public class Collectible : MonoBehaviour
         
     }
 
-    void Create(Player target)
+    public void Create(Player target)
     {
         this.targetPlayer = target;
     }
