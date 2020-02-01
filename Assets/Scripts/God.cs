@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class God : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class God : MonoBehaviour
     public float deathRateGain;
     public GameObject playerPrefab;
     public GameObject gate;
+    public Canvas canvas;
+    public Slider gateSlider;
     public List<GameObject> Souls = new List<GameObject>();
     public List<GameObject> Players = new List<GameObject>();
     public float theCurrentAmountOfPeopleDyingRightNowAtTheMomentCurrently;
@@ -22,6 +25,8 @@ public class God : MonoBehaviour
     void Start()
     {
         God.current = this;
+
+        gateSlider.maxValue = 1.0f;
 
         List<ControlScheme> controls = new List<ControlScheme>();
         controls.Add(new WASDControlScheme());
@@ -62,6 +67,8 @@ public class God : MonoBehaviour
             SpawnSoul();
             theCurrentAmountOfPeopleDyingRightNowAtTheMomentCurrently -= 1f;
         }
+
+        gateSlider.value = gateScript.healthPercentage();
     }
 
     public Player FindNearestPlayer(Vector3 callerPosition)
