@@ -16,7 +16,6 @@ public class God : MonoBehaviour
     public float theCurrentAmountOfPeopleDyingRightNowAtTheMomentCurrently;
     public List<GameObject> charterOfTheDamned = new List<GameObject>();
     public List<Player> Reaperlings = new List<Player>();
-    public GameObject gate;
     public static God current;
 
     // Start is called before the first frame update
@@ -31,7 +30,7 @@ public class God : MonoBehaviour
 
         for (int i = 0; i < playerCount; i++)
         {
-            GameObject player = Instantiate(playerPrefab, new Vector3(-12 + i, -80, 223), Quaternion.identity) as GameObject;
+            GameObject player = Instantiate(playerPrefab,transform.position, Quaternion.identity) as GameObject;
             Player playerScript = player.GetComponent<Player>();
             playerScript.Create(controls[i]);
             Players.Add(player);
@@ -80,7 +79,7 @@ public class God : MonoBehaviour
 
     void SpawnSoul()
     {
-        charterOfTheDamned.Add(Instantiate(Souls[0], new Vector3(transform.position.x + Random.Range(30, -30), transform.position.y, transform.position.z), Quaternion.identity));
+        charterOfTheDamned.Add(Instantiate(Souls[0], new Vector3(transform.position.x + Random.Range(1, -1), transform.position.y, transform.position.z), Quaternion.identity));
     }
     // this is the method for when you win
     void Victory()

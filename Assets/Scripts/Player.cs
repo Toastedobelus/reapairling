@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +13,15 @@ public class Player : MonoBehaviour
     public float gravity = 20.0f;
 
     public int repairAmount = 1;
+    public int maxHealth = 25;
+    public int currentHealth = 25;
+
+
+
 
     private float pickupRange = 3;
     private Vector3 moveDirection = Vector3.zero;
+  
 
     // Start is called before the first frame update
     void Start()
@@ -85,6 +92,20 @@ public class Player : MonoBehaviour
                 Gate gate = hitColliders[i].GetComponent<Gate>();
                 gate.Repair(this.repairAmount);
             }
+            if (hitColliders[i].tag == "Soul")
+            {
+                Soul soul = hitColliders[i].GetComponent<Soul>();
+                soul.TakeDamage(2);
+            }
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }

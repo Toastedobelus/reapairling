@@ -79,8 +79,8 @@ Material:
     - _Mode: 3
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Rim: 4.6
-    - _Size: 7.05
+    - _Rim: 1.56
+    - _Size: 6.44
     - _SmoothnessTextureChannel: 1
     - _SoftParticlesEnabled: 0
     - _SoftParticlesFarFadeDistance: 4.7

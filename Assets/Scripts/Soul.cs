@@ -6,11 +6,12 @@ using UnityEngine.AI;
 
 public class Soul : MonoBehaviour
 {
-
     public Mood mood;
+    public int maxHealth;
+    public int currentHealth;
     public float hustle;
     private GameObject destiny;
-
+    public int attack;
 
 
     private NavMeshAgent navMesh;
@@ -19,10 +20,28 @@ public class Soul : MonoBehaviour
     public Mood Mood
     {
         get => mood;
-        set {
+        set
+        {
             mood = value;
             ChangeMood();
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Player":
+                collision.gameObject.GetComponent<Player>().TakeDamage(attack);
+                break;
+            case "gate":
+                collision.gameObject.GetComponent<Gate>().TakeDamage(attack);
+                break;
+            default:
+                break;
+
+        }
+
     }
 
     private void ChangeMood()
@@ -48,9 +67,11 @@ public class Soul : MonoBehaviour
         }
     }
 
-    public GameObject Destiny {
+    public GameObject Destiny
+    {
         get => destiny;
-        set {
+        set
+        {
             destiny = value;
             navMesh.SetDestination(Destiny.transform.position);
         }
@@ -71,16 +92,21 @@ public class Soul : MonoBehaviour
     {
         if (mood == Mood.Impatient)
         {
-           if( Vector3.Distance(transform.position,God.current.FindNearestPlayer(transform.position).transform.position) < 5)
+            if (Vector3.Distance(transform.position, God.current.FindNearestPlayer(transform.position).transform.position) < 5)
             {
                 mood = Mood.Vexed;
             }
         }
     }
 
-
-
-
+    internal void TakeDamage(int damage)
+    {
+        currentHealth = -damage;
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
 
 public enum Mood
