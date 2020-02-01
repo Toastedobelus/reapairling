@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public static class PlayerCount
+public static class Global
 {
-    public static int Count { get; set; }
+    public static int PlayerCount { get; set; }
+    public static string EndGame { get; set; }
 }
 
 public class MainMenu : MonoBehaviour
@@ -36,7 +37,7 @@ public class MainMenu : MonoBehaviour
             int val = int.Parse(input.text);
             if (val >= 1 && val <= 4)
             {
-                PlayerCount.Count = val;
+                Global.PlayerCount = val;
                 SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
             }
         }

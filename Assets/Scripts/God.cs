@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class God : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class God : MonoBehaviour
     void Start()
     {
         God.current = this;
-        this.playerCount = PlayerCount.Count;
+        this.playerCount = Global.PlayerCount;
 
         gateSlider.maxValue = 1.0f;
 
@@ -123,13 +124,14 @@ public class God : MonoBehaviour
         Collectibles.Add(collectible);
     }
 
-    // this is the method for when you win
     void Victory()
     {
-       // Debug.Log("You have won!");
+        Global.EndGame = "You win!";
+        SceneManager.LoadScene("EndScreen", LoadSceneMode.Single);
     }
     void Defeat()
     {
-       // Debug.Log("You have lost!");
+        Global.EndGame = "You lose!";
+        SceneManager.LoadScene("EndScreen", LoadSceneMode.Single);
     }
 }
