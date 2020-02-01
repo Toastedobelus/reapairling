@@ -26,6 +26,7 @@ public class God : MonoBehaviour
     void Start()
     {
         God.current = this;
+        this.playerCount = PlayerCount.Count;
 
         gateSlider.maxValue = 1.0f;
 
@@ -115,7 +116,6 @@ public class God : MonoBehaviour
 
     public void SpawnCollectible(Vector3 position)
     {
-        // Player targetPlayer = Players[(int)Random.Range(0, playerCount)];
         Player targetPlayer = Players[(int)Random.Range(0, playerCount)].GetComponent<Player>();
         GameObject collectible = Instantiate(collectiblePrefab, position, Quaternion.identity) as GameObject;
         Collectible collectibleScript = collectible.GetComponent<Collectible>();

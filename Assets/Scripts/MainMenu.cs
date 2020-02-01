@@ -2,30 +2,52 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+public static class PlayerCount
+{
+    public static int Count { get; set; }
+}
 
 public class MainMenu : MonoBehaviour
 {
     public bool isStart;
     public bool isQuit;
 
+    public GameObject numPlayers;
+
+    private bool isEnteringPlayerCount = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (isStart)
+        {
+            numPlayers.SetActive(isEnteringPlayerCount);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (isEnteringPlayerCount && Input.GetKeyDown(KeyCode.Return))
+        {
+            InputField input = numPlayers.GetComponent<InputField>();
+            int val = int.Parse(input.text);
+            if (val >= 1 && val <= 4)
+            {
+                PlayerCount.Count = val;
+                SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+            }
+        }
     }
 
     void OnMouseUp()
     {
-        Debug.Log("hello");
         if (isStart)
         {
-            SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+            isEnteringPlayerCount = true;
+            numPlayers.SetActive(isEnteringPlayerCount);
         }
         if (isQuit)
         {
