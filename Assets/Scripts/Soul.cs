@@ -26,7 +26,7 @@ public class Soul : MonoBehaviour
     void Start()
     {
         navMesh = gameObject.GetComponent<NavMeshAgent>();
-        Destiny = God.current.Gate;
+        Destiny = God.current.gate;
         navMesh.speed = hustle;
         navMesh.isStopped = false;
 

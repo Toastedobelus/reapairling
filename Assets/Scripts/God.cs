@@ -10,11 +10,11 @@ public class God : MonoBehaviour
     public float deathRate;
     public float deathRateGain;
     public GameObject playerPrefab;
+    public GameObject gate;
     public List<GameObject> Souls = new List<GameObject>();
     public List<GameObject> Players = new List<GameObject>();
     public float theCurrentAmountOfPeopleDyingRightNowAtTheMomentCurrently;
     public List<GameObject> charterOfTheDamned = new List<GameObject>();
-    public GameObject Gate;
     public static God current;
 
     // Start is called before the first frame update
@@ -39,9 +39,14 @@ public class God : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Gate gateScript = gate.GetComponent<Gate>();
         if (maxSouls < charterOfTheDamned.Count)
         {
             Defeat();
+        }
+        if (gateScript.isRepaired())
+        {
+            Victory();
         }
 
         //apply the death rate to the counter

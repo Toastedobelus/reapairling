@@ -76,7 +76,7 @@ public class WASDControlScheme : ControlScheme
 
     public bool checkInteraction()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.CapsLock))
         {
             return true;
         }
