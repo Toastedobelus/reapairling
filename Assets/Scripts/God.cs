@@ -35,13 +35,19 @@ public class God : MonoBehaviour
         controls.Add(new IJKLControlScheme());
 
         List<Rect> viewports = new List<Rect>();
-        if (playerCount > 2)
+        if (playerCount == 4)
         {
             viewports.Add(new Rect(0, 0, 0.5f, 0.5f));
             viewports.Add(new Rect(0.5f, 0.5f, 0.5f, 0.5f));
             viewports.Add(new Rect(0, 0.5f, 0.5f, 0.5f));
             viewports.Add(new Rect(0.5f, 0, 0.5f, 0.5f));
-        } else if (playerCount > 1)
+        } else if (playerCount == 3)
+        {
+            viewports.Add(new Rect(0, 0, 0.5f, 0.5f));
+            viewports.Add(new Rect(0.5f, 0, 0.5f, 0.5f));
+            viewports.Add(new Rect(0, 0.5f, 1, 0.5f));
+        }
+        else if (playerCount == 2)
         {
             viewports.Add(new Rect(0, 0, 0.5f, 1));
             viewports.Add(new Rect(0.5f, 0, 0.5f, 1));
