@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public float jump = 4.0f;
     public float gravity = 20.0f;
 
+    private float pickupRange = 3;
     private Vector3 moveDirection = Vector3.zero;
 
     // Start is called before the first frame update
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour
 
         if (this.controls.checkInteraction())
         {
+            this.getCollisions();
             Debug.Log("Interaction key pressed");
         }
     }
@@ -66,5 +68,14 @@ public class Player : MonoBehaviour
         }
 
         return velocity;
+    }
+
+    void getCollisions()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, pickupRange);
+        for (int i = 0; i < hitColliders.Length; i++)
+        {
+            Debug.Log(hitColliders[i].tag);
+        }
     }
 }
