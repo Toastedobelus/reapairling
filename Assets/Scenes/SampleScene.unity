@@ -282,6 +282,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218318073}
   m_CullTransparentMesh: 0
+--- !u!1 &224075131
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 224075132}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &224075132
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224075131}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.381, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1034399573}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &414350104
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,21 +342,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSouls: 150
-  playerCount: 2
+  playerCount: 1
   deathRate: 0.3
   deathRateGain: 0.02
   playerPrefab: {fileID: 3411386424923674044, guid: b8e93aa5910729441a15919e89d45f4d,
     type: 3}
   gate: {fileID: 1034399569}
-  gateRallyPoint: {fileID: 0}
+  gateRallyPoint: {fileID: 224075131}
   canvas: {fileID: 0}
   gateSlider: {fileID: 205873634}
   Souls:
   - {fileID: 471800746445356781, guid: d1915fcee7047e64684f5a097031a7bf, type: 3}
   Players: []
   theCurrentAmountOfPeopleDyingRightNowAtTheMomentCurrently: 0.14
-  charterOfTheDamned: []
-  Reaperlings: []
 --- !u!4 &414350106
 Transform:
   m_ObjectHideFlags: 0
@@ -883,7 +911,8 @@ Transform:
   m_LocalRotation: {x: -0, y: 0.69812196, z: -0, w: 0.7159789}
   m_LocalPosition: {x: 9.1, y: 16.5, z: 132.3}
   m_LocalScale: {x: 34.637, y: 42.537, z: 1.0000002}
-  m_Children: []
+  m_Children:
+  - {fileID: 224075132}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 88.553, z: 0}
