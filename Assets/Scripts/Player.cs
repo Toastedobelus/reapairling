@@ -106,7 +106,9 @@ public class Player : MonoBehaviour
                     var spendable = collectibles[0];
                     this.collectibles.Remove(spendable);
                     God.current.Collectibles.Remove(spendable.gameObject);
+                    God.current.Collectibles.TrimExcess();
                     Destroy(spendable.gameObject);
+                    collectibles.TrimExcess();
                     gate.Repair(this.repairAmount);
                 }
                 
