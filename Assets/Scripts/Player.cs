@@ -103,9 +103,10 @@ public class Player : MonoBehaviour
                 Gate gate = hitColliders[i].GetComponent<Gate>();
                 if (this.collectibles.Count > 0)
                 {
-                    var collectible = collectibles[0];
-                    this.collectibles.RemoveAt(0);
-                    Destroy(collectible);
+                    var spendable = collectibles[0];
+                    this.collectibles.Remove(spendable);
+                    God.current.Collectibles.Remove(spendable.gameObject);
+                    Destroy(spendable.gameObject);
                     gate.Repair(this.repairAmount);
                 }
                 
