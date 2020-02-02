@@ -22,6 +22,7 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GetComponent<Renderer>().enabled = false;
         if (isStart)
         {
             numPlayers.SetActive(isEnteringPlayerCount);
