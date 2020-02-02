@@ -83,8 +83,12 @@ Animation:
   m_GameObject: {fileID: 2600622586978065851}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
+  m_Animation: {fileID: -3100369314251171874, guid: d462c638779a7b348b0a5866dc71ca70,
+    type: 3}
+  m_Animations:
+  - {fileID: 0}
+  - {fileID: 6720303635017113406, guid: d462c638779a7b348b0a5866dc71ca70, type: 3}
+  - {fileID: -3100369314251171874, guid: d462c638779a7b348b0a5866dc71ca70, type: 3}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -103,7 +107,6 @@ GameObject:
   - component: {fileID: 3411386424923674045}
   - component: {fileID: 4415944244242036008}
   - component: {fileID: -4946649563065569918}
-  - component: {fileID: 9194777096817155246}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -148,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 7763078229669373839}
+  model: {fileID: 2600622586978065851}
   hustle: 4
   jump: 4
   gravity: 9.8
@@ -205,22 +209,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!111 &9194777096817155246
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3411386424923674044}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 1827226128182048838, guid: d462c638779a7b348b0a5866dc71ca70,
-    type: 3}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1001 &6284396563005441202
 PrefabInstance:
   m_ObjectHideFlags: 0
