@@ -23,21 +23,23 @@ public class PeriodicCollectableSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (totalSpawns <= 0)
+        {
+            return;
+        }
         if (counter < nextSpawnTime)
         {
             counter += 1 * Time.deltaTime;
         }
         else
         {
+
             Debug.Log("Spawning a collectable");
             god.SpawnCollectible(new Vector3(transform.position.x + Random.Range(-displacementRadius,displacementRadius), transform.position.y + 3.33f, transform.position.z + Random.Range(-displacementRadius, displacementRadius)));
             counter = 0;
             SetNextSpawnTime();
             totalSpawns -= 1;
-            if (totalSpawns <= 0)
-            {
-                Destroy(this.gameObject);
-            }
+
         }
 
         

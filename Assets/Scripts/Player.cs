@@ -120,9 +120,7 @@ public class Player : MonoBehaviour
                     var spendable = collectibles[0];
                     this.collectibles.Remove(spendable);
                     God.current.Collectibles.Remove(spendable.gameObject);
-                    God.current.Collectibles.TrimExcess();
                     Destroy(spendable.gameObject);
-                    collectibles.TrimExcess();
                     gate.Repair(this.repairAmount);
                 }
                 
@@ -143,6 +141,11 @@ public class Player : MonoBehaviour
             if (hitColliders[i].tag == "Collectible")
             {
                 Collectible collectible = hitColliders[i].GetComponent<Collectible>();
+                if (collectible.ownerPlayer != null)
+                {
+                    collectible.ownerPlayer.collectibles.Remove(collectible);
+                    collectible.ownerPlayer.collectibles.TrimExcess();
+                }
                 this.collectibles.Add(collectible);
                 collectible.ownerPlayer = this;
             }

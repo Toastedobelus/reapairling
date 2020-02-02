@@ -74,6 +74,8 @@ public class Soul : MonoBehaviour
                 Destiny = God.current.gateRallyPoint;
                 meshRenderer.material.SetColor("_Color", Color.cyan);
                 break;
+            default:
+                break;
         }
     }
 
@@ -106,6 +108,7 @@ public class Soul : MonoBehaviour
         Destiny = God.current.gateRallyPoint;
         navMesh.speed = hustle;
         navMesh.isStopped = false;
+        mood = (Mood)UnityEngine.Random.Range(1, 3);
     }
 
     // Update is called once per frame
@@ -160,6 +163,7 @@ public class Soul : MonoBehaviour
 
 public enum Mood
 {
+    apathetic,
     Chill,
     Impatient,
     Vexed
