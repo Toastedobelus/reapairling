@@ -784,7 +784,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSouls: 150
-  playerCount: 1
+  playerCount: 2
   deathRate: 0.02
   deathRateGain: 0
   playerPrefab: {fileID: 3411386424923674044, guid: b8e93aa5910729441a15919e89d45f4d,
@@ -2185,6 +2185,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 50
+--- !u!111 &1027385802
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027385798}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 1827226128182048838, guid: 796347352f0f0cd4aad5bdd49a50b4b4,
+    type: 3}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1408129683
 GameObject:
   m_ObjectHideFlags: 0
