@@ -17,6 +17,11 @@ public class Soul : MonoBehaviour
     public GameObject currentTarget;
     public GameObject meshTarget;
 
+
+    public float maxFloatHeight;
+    public float minFloatHeight;
+    public float floatChangeRate;
+    public bool ascending;
     private NavMeshAgent navMesh;
     private Renderer meshRenderer;
 
@@ -69,6 +74,8 @@ public class Soul : MonoBehaviour
                 Destiny = God.current.gateRallyPoint;
                 meshRenderer.material.SetColor("_Color", Color.cyan);
                 break;
+            default:
+                break;
         }
     }
 
@@ -101,6 +108,7 @@ public class Soul : MonoBehaviour
         Destiny = God.current.gateRallyPoint;
         navMesh.speed = hustle;
         navMesh.isStopped = false;
+        mood = (Mood)UnityEngine.Random.Range(1, 3);
     }
 
     // Update is called once per frame
@@ -117,6 +125,26 @@ public class Soul : MonoBehaviour
         {
             navMesh.destination = currentTarget.transform.position;
         }
+
+        if (ascending)
+        {
+            if (navMesh.baseOffset < maxFloatHeight)
+            {
+                navMesh.baseOffset += floatChangeRate * Time.deltaTime;
+            }
+            else ascending = false;
+        }
+        else
+        {
+            if (navMesh.baseOffset > minFloatHeight)
+            {
+                navMesh.baseOffset += floatChangeRate * Time.deltaTime;
+            }
+            else ascending = true;
+
+        }
+
+
     }
 
     internal void TakeDamage(int damage)
@@ -125,13 +153,17 @@ public class Soul : MonoBehaviour
         if (currentHealth <= 0)
         {
             God.current.SpawnCollectible(transform.position);
-            Destroy(gameObject);
+            if (gameObject != null)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
 
 public enum Mood
 {
+    apathetic,
     Chill,
     Impatient,
     Vexed
