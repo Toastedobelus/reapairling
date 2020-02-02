@@ -27,7 +27,10 @@ public class God : MonoBehaviour
     void Start()
     {
         God.current = this;
-        this.playerCount = Global.PlayerCount;
+        if (Global.PlayerCount != 0)
+        {
+            this.playerCount = Global.PlayerCount;
+        }
 
         gateSlider.maxValue = 1.0f;
 

@@ -15,6 +15,7 @@ public class Soul : MonoBehaviour
     public bool naving;
     public float aggroRange;
     public GameObject currentTarget;
+    public GameObject meshTarget;
 
     private NavMeshAgent navMesh;
     private Renderer meshRenderer;
@@ -96,7 +97,7 @@ public class Soul : MonoBehaviour
     void Start()
     {
         navMesh = gameObject.GetComponent<NavMeshAgent>();
-        meshRenderer = gameObject.GetComponent<Renderer>();
+        meshRenderer = meshTarget.GetComponent<Renderer>();
         Destiny = God.current.gateRallyPoint;
         navMesh.speed = hustle;
         navMesh.isStopped = false;
