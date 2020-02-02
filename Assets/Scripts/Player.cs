@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     CharacterController characterController;
 
     public Camera camera;
+    public GameObject model;
 
     public ControlScheme controls;
     public float hustle = 4;
@@ -26,11 +27,20 @@ public class Player : MonoBehaviour
     private float pickupRange = 3;
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 rotation;
-    public Color color;
+    private Animation animations;
+
+    private static float currentTime;
+    private static float cooldownLength = 2;
+    private static float cooldownEnd;
+
     // Start is called before the first frame update
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        animations = model.GetComponent<Animation>();
+
+        currentTime = Time.time;
+        cooldownEnd = Time.time + cooldownLength;
     }
 
     public void Create(ControlScheme controlScheme, Rect viewportRect)
@@ -60,11 +70,15 @@ public class Player : MonoBehaviour
         characterController.Move(move * hustle);
         this.transform.Rotate(this.rotation);
 
-        if (this.controls.checkInteraction())
+        if (this.controls.checkInteraction() && !onCooldown())
         {
+            TriggerCooldown();
             this.getCollisions();
-            Debug.Log("Interaction key pressed");
+            animations.Play("Attack");
+            Debug.Log("Interaction");
         }
+
+        UpdateCooldown();
     }
 
     float getVertical()
@@ -135,12 +149,36 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage)  
     {
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
             Destroy(gameObject);
         }
+    }
+
+    private void TriggerCooldown()
+    {
+        cooldownEnd = Time.time + cooldownLength;
+    }
+
+    private void TriggerCooldown(int length)
+    {
+        cooldownEnd = Time.time + length;
+    }
+
+    private void UpdateCooldown()
+    {
+        currentTime = Time.time;
+    }
+
+    private bool onCooldown()
+    {
+        if (currentTime <= cooldownEnd)
+        {
+            return true;
+        }
+        return false;
     }
 }
