@@ -47,7 +47,7 @@ public class Soul : MonoBehaviour
                 break;
         }
     }
-   
+
 
     private void ChangeMood()
     {
@@ -62,8 +62,8 @@ public class Soul : MonoBehaviour
             case Mood.Vexed:
                 Hustle = 10;
                 currentTarget = God.current.FindNearestPlayer(this.transform.position);
-                meshRenderer.material.SetColor("_Color",Color.red);                
-                    break;
+                meshRenderer.material.SetColor("_Color", Color.red);
+                break;
             case Mood.Impatient:
                 Hustle = 7;
                 Destiny = God.current.gateRallyPoint;
@@ -74,7 +74,7 @@ public class Soul : MonoBehaviour
 
     public GameObject Destiny
     {
-       
+
         get => destiny;
         set
         {
