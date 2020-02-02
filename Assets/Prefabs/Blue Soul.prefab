@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8c81f7cbadc80b543a0e7968e42fde2f, type: 2}
+  - {fileID: 2100000, guid: f6732aa8d1e875a43881c7edc2f0e430, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -172,6 +172,10 @@ MonoBehaviour:
   aggroRange: 20
   currentTarget: {fileID: 0}
   meshTarget: {fileID: 3944294974515498326}
+  maxFloatHeight: 0.1
+  minFloatHeight: 0.05
+  floatChangeRate: 0
+  ascending: 0
 --- !u!135 &1135617090057262681
 SphereCollider:
   m_ObjectHideFlags: 0

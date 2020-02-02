@@ -38,7 +38,7 @@ public class God : MonoBehaviour
         controls.Add(new WASDControlScheme());
         controls.Add(new ArrowKeysControlScheme());
         controls.Add(new IJKLControlScheme());
-        controls.Add(new IJKLControlScheme());
+        controls.Add(new NumpadControlScheme());
 
         List<Rect> viewports = new List<Rect>();
         if (playerCount == 4)
@@ -64,7 +64,7 @@ public class God : MonoBehaviour
 
         for (int i = 0; i < playerCount; i++)
         {
-            GameObject player = Instantiate(playerPrefab,gateRallyPoint.transform.position, Quaternion.identity) as GameObject;
+            GameObject player = Instantiate(playerPrefab, new Vector3(gateRallyPoint.transform.position.x + i * 2, gateRallyPoint.transform.position.y, gateRallyPoint.transform.position.z), Quaternion.identity) as GameObject;
             Player playerScript = player.GetComponent<Player>();
             playerScript.Create(controls[i], viewports[i]);
             Players.Add(player);

@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     public float jump = 4;
     public float gravity = 9.8f;
     public float rotateSpeed = 90;
-
+    
     public int id;
     public int repairAmount = 1;
     public int maxHealth = 25;
@@ -22,10 +22,11 @@ public class Player : MonoBehaviour
 
     public List<Collectible> collectibles;
 
+    private float vSpeed;
     private float pickupRange = 3;
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 rotation;
-
+    public Color color;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour
 
     public void Update()
     {
+        
         float horizontal = getHorizontal();
         float vertical = getVertical();
 
@@ -50,11 +52,11 @@ public class Player : MonoBehaviour
 
         if (characterController.isGrounded && this.controls.checkJump())
         {
-            move.y += this.jump;
+           vSpeed = this.jump;
         }
 
-        move.y -= (gravity * Time.deltaTime);
-
+        vSpeed -= (gravity * Time.deltaTime);
+        move.y = vSpeed;
         characterController.Move(move * hustle);
         this.transform.Rotate(this.rotation);
 
@@ -99,7 +101,14 @@ public class Player : MonoBehaviour
             if (hitColliders[i].tag == "Gate")
             {
                 Gate gate = hitColliders[i].GetComponent<Gate>();
-                gate.Repair(this.repairAmount);
+                if (this.collectibles.Count > 0)
+                {
+                    var collectible = collectibles[0];
+                    this.collectibles.RemoveAt(0);
+                    Destroy(collectible);
+                    gate.Repair(this.repairAmount);
+                }
+                
             }
             if (hitColliders[i].tag == "Soul")
             {

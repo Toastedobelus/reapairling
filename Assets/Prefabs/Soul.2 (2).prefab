@@ -155,6 +155,12 @@ MonoBehaviour:
   attack: 1
   naving: 0
   aggroRange: 20
+  currentTarget: {fileID: 0}
+  meshTarget: {fileID: 0}
+  maxFloatHeight: 0.05
+  minFloatHeight: 0.1
+  floatChangeRate: 0.01
+  ascending: 0
 --- !u!135 &2044072044056503861
 SphereCollider:
   m_ObjectHideFlags: 0

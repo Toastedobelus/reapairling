@@ -139,7 +139,7 @@ public class ArrowKeysControlScheme : ControlScheme
 
     public bool checkJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             return true;
         }
@@ -214,7 +214,7 @@ public class IJKLControlScheme : ControlScheme
 
     public bool checkJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.U))
         {
             return true;
         }
@@ -226,7 +226,81 @@ public class IJKLControlScheme : ControlScheme
 
     public bool checkInteraction()
     {
-        if (Input.GetKeyDown(KeyCode.N))
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
+public class NumpadControlScheme : ControlScheme
+{
+    public bool checkUp()
+    {
+        if (Input.GetKey(KeyCode.Keypad5))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool checkDown()
+    {
+        if (Input.GetKey(KeyCode.Keypad6))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool checkLeft()
+    {
+        if (Input.GetKey(KeyCode.Keypad3))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool checkRight()
+    {
+        if (Input.GetKey(KeyCode.Keypad9))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool checkJump()
+    {
+        if (Input.GetKeyDown(KeyCode.KeypadPeriod))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool checkInteraction()
+    {
+        if (Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             return true;
         }

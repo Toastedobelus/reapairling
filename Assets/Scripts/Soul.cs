@@ -17,6 +17,11 @@ public class Soul : MonoBehaviour
     public GameObject currentTarget;
     public GameObject meshTarget;
 
+
+    public float maxFloatHeight;
+    public float minFloatHeight;
+    public float floatChangeRate;
+    public bool ascending;
     private NavMeshAgent navMesh;
     private Renderer meshRenderer;
 
@@ -117,6 +122,26 @@ public class Soul : MonoBehaviour
         {
             navMesh.destination = currentTarget.transform.position;
         }
+
+        if (ascending)
+        {
+            if (navMesh.baseOffset < maxFloatHeight)
+            {
+                navMesh.baseOffset += floatChangeRate * Time.deltaTime;
+            }
+            else ascending = false;
+        }
+        else
+        {
+            if (navMesh.baseOffset > minFloatHeight)
+            {
+                navMesh.baseOffset += floatChangeRate * Time.deltaTime;
+            }
+            else ascending = true;
+
+        }
+
+
     }
 
     internal void TakeDamage(int damage)

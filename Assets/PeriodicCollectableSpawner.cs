@@ -10,9 +10,8 @@ public class PeriodicCollectableSpawner : MonoBehaviour
     public float displacementRadius;
     public int totalSpawns;
 
-
-    private float nextSpawnTime;
-    private float counter;
+    public float nextSpawnTime;
+    public float counter;
     private God god;
     // Start is called before the first frame update
     void Start()
@@ -30,7 +29,8 @@ public class PeriodicCollectableSpawner : MonoBehaviour
         }
         else
         {
-            god.SpawnCollectible(new Vector3(Random.Range(-displacementRadius,displacementRadius), Random.Range(-displacementRadius, displacementRadius),0));
+            Debug.Log("Spawning a collectable");
+            god.SpawnCollectible(new Vector3(transform.position.x + Random.Range(-displacementRadius,displacementRadius), transform.position.y + 3.33f, transform.position.z + Random.Range(-displacementRadius, displacementRadius)));
             counter = 0;
             SetNextSpawnTime();
             totalSpawns -= 1;
